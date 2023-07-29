@@ -15,6 +15,21 @@ class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    // Завантаження контактів з localStorage при завантаженні застосунку
+    const storedContacts = localStorage.getItem('contacts');
+    if (storedContacts) {
+      this.setState({ contacts: JSON.parse(storedContacts) });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // Зберігання контактів у localStorage під час оновлення стану
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   addContact = (name, number) => {
     // Перевірка, чи існує контакт з таким самим іменем
     const existingContact = this.state.contacts.find(
