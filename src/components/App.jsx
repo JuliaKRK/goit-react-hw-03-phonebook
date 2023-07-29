@@ -23,7 +23,7 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevState) {
     // Зберігання контактів у localStorage під час оновлення стану
     if (prevState.contacts !== this.state.contacts) {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
